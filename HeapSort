@@ -1,0 +1,71 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+void swap(int &a,int &b);
+void sorthelp(int data[],int low,int high);
+void heapsort(int data[],int n);
+int main()
+{
+    int number;
+    cout<<"请输入你要输入的数据的个数"<<endl;
+    cin>>number;
+    int data[number];
+    cout<<"请输入你要排序的"<<number<<"个数据"<<endl;
+    for(int i=0;i<number;i++)
+    {
+        cin>>data[i];
+    }
+
+    cout<<"请确认的数据："<<endl;
+     for(int i=0;i<number;i++)
+    {
+        cout<<data[i]<<setw(5);
+    }
+    cout<<endl;
+     heapsort(data,number);
+    cout<<"顶堆排序后的顺序是："<<endl;
+     for(int i=0;i<number;i++)
+    {
+        cout<<data[i]<<setw(5);
+    }
+    }
+    void swap(int &a,int &b)
+    {
+        int temp;
+        temp=a;
+        a=b;
+        b=temp;
+    }
+
+    void sorthelp(int data[],int low,int high)
+    {
+        for(int f=low,i=2*low+1;i<=high;i=2*i+1)
+        {
+            if(i<high&&data[i]<data[i+1])
+            {
+                i++;
+            }
+
+            if(data[f]>=data[i])
+            {
+                break;
+            }
+                swap(data[f],data[i]);
+                f=i;
+        }
+    }
+
+    void heapsort(int data[],int n)
+    {
+        int i;
+        for(i=(n-2)/2;i>=0;--i)
+        {
+            sorthelp(data,i,n-1);
+        };
+
+            for(i=n-1;i>0;--i)
+            {
+                swap(data[0],data[i]);
+                sorthelp(data,0,i-1);
+            }
+    }
